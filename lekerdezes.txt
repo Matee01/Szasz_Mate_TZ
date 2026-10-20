@@ -1,0 +1,23 @@
+SELECT
+    t.id,
+    t.nev,
+    t.ar,
+    t.keszlet,
+    t.elerheto,
+    k.nev AS kategoria_nev
+FROM termekek t
+JOIN kategoriak k
+    ON t.kategoria_id = k.id
+ORDER BY t.ar ASC;
+
+
+SELECT
+    id,
+    kategoria_id,
+    nev,
+    ar,
+    keszlet,
+    elerheto
+FROM termekek
+WHERE elerheto = 1
+  AND keszlet > 0;
