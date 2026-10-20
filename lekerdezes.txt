@@ -1,3 +1,5 @@
+1. /termekek
+
 SELECT
     t.id,
     t.nev,
@@ -10,6 +12,8 @@ JOIN kategoriak k
     ON t.kategoria_id = k.id
 ORDER BY t.ar ASC;
 
+
+2. /termekek/elerheto
 
 SELECT
     id,
