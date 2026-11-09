@@ -1,0 +1,59 @@
+SELECT
+    t.id,
+    t.nev,
+    t.ar,
+    t.keszlet,
+    t.elerheto,
+    k.nev AS kategoria_nev
+FROM termekek t
+INNER JOIN kategoriak k
+ON t.kategoria_id = k.id
+ORDER BY t.ar ASC;
+
+SELECT *
+FROM termekek
+WHERE elerheto = 1
+AND keszlet > 0;
+
+SELECT *
+FROM termekek
+WHERE nev LIKE '%fej%';
+
+SELECT
+    k.nev AS kategoria_nev,
+    COUNT(t.id) AS termekek_szama,
+    ROUND(AVG(t.ar),1) AS atlagos_ar
+FROM kategoriak k
+INNER JOIN termekek t
+ON k.id = t.kategoria_id
+GROUP BY k.id, k.nev;
+
+SELECT
+    nev,
+    ar,
+    keszlet
+FROM termekek
+WHERE ar > 10000
+ORDER BY keszlet DESC;
+
+INSERT INTO kategoriak (nev)
+VALUES ('Játék');
+
+INSERT INTO termekek
+(kategoria_id, nev, ar, keszlet, elerheto)
+VALUES
+(1, 'Monitor', 65000, 5, 1);
+
+UPDATE termekek
+SET ar = 5000
+WHERE id = 1;
+
+UPDATE kategoriak
+SET nev = 'IT'
+WHERE id = 1;
+
+DELETE FROM termekek
+WHERE id = 2;
+
+DELETE FROM kategoriak
+WHERE id = 3;

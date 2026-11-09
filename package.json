@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Matee01/Szasz_Mate_TZ#readme",
   "dependencies": {
     "cors": "^2.8.6",
-    "dotenv": "^18.0.8",
+    "dotenv": "^18.0.10",
     "express": "^5.3.0",
     "mysql2": "^3.24.6"
   }

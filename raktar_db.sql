@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2026. Okt 20. 10:21
+-- Létrehozás ideje: 2026. Nov 09. 13:50
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -39,9 +39,9 @@ CREATE TABLE `kategoriak` (
 --
 
 INSERT INTO `kategoriak` (`id`, `nev`) VALUES
-(1, 'Elektronikai'),
-(2, 'Irodaszer'),
-(3, 'Háztartási gép');
+(1, 'Elektronika'),
+(3, 'Háztartási gép'),
+(2, 'Irodaszer');
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,8 @@ INSERT INTO `termekek` (`id`, `kategoria_id`, `nev`, `ar`, `keszlet`, `elerheto`
 -- A tábla indexei `kategoriak`
 --
 ALTER TABLE `kategoriak`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nev` (`nev`);
 
 --
 -- A tábla indexei `termekek`
