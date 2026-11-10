@@ -13,10 +13,10 @@ const db = mysql.createConnection({
 });
 db.connect((err) => {
     if (err) {
-        console.log("Adatbázis hiba:");
+        console.log("Hiba:");
         console.log(err);
     } else {
-        console.log("Sikeres adatbázis kapcsolat!");
+        console.log("Siker!");
     }
 });
 app.get("/termekek", (req, res) => {
@@ -65,18 +65,14 @@ app.get("/termekek/elerheto", (req, res) => {
         res.json(result);
 
     });
-
 });
 app.get("/termekek/kereses/:szoveg", (req, res) => {
-
     const szoveg = req.params.szoveg;
-
     const sql = `
         SELECT *
         FROM termekek
         WHERE nev LIKE ?
     `;
-
     db.query(
         sql,
         [`%${szoveg}%`],
@@ -92,7 +88,6 @@ app.get("/termekek/kereses/:szoveg", (req, res) => {
 
         }
     );
-
 });
 app.get("/kategoriak/statisztika", (req, res) => {
 
@@ -106,7 +101,6 @@ app.get("/kategoriak/statisztika", (req, res) => {
             ON k.id = t.kategoria_id
         GROUP BY k.id, k.nev
     `;
-
     db.query(sql, (err, result) => {
 
         if (err) {
@@ -114,14 +108,10 @@ app.get("/kategoriak/statisztika", (req, res) => {
                 hiba: err.message
             });
         }
-
         res.json(result);
-
     });
-
 });
 app.get("/termekek/dragak", (req, res) => {
-
     const sql = `
         SELECT
             nev,
@@ -131,7 +121,6 @@ app.get("/termekek/dragak", (req, res) => {
         WHERE ar > 10000
         ORDER BY keszlet DESC
     `;
-
     db.query(sql, (err, result) => {
 
         if (err) {
@@ -141,12 +130,9 @@ app.get("/termekek/dragak", (req, res) => {
         }
 
         res.json(result);
-
     });
-
 });
 app.post("/termekek", (req, res) => {
-
     const {
         kategoria_id,
         nev,
@@ -154,7 +140,6 @@ app.post("/termekek", (req, res) => {
         keszlet,
         elerheto
     } = req.body;
-
     const sql = `
         INSERT INTO termekek
         (
@@ -166,18 +151,15 @@ app.post("/termekek", (req, res) => {
         )
         VALUES (?, ?, ?, ?, ?)
     `;
-
     db.query(
         sql,
         [kategoria_id, nev, ar, keszlet, elerheto],
         (err, result) => {
-
             if (err) {
                 return res.status(500).json({
                     hiba: err.message
                 });
             }
-
             res.json({
                 uzenet: "Sikeres hozzáadás",
                 id: result.insertId
@@ -185,17 +167,14 @@ app.post("/termekek", (req, res) => {
 
         }
     );
-
 });
 app.delete("/termekek/:id", (req, res) => {
-
     const id = req.params.id;
 
     const sql = `
         DELETE FROM termekek
         WHERE id = ?
     `;
-
     db.query(sql, [id], (err, result) => {
 
         if (err) {
@@ -203,13 +182,11 @@ app.delete("/termekek/:id", (req, res) => {
                 hiba: err.message
             });
         }
-
         res.json({
             uzenet: "Sikeres törlés"
         });
 
     });
-
 });
 app.listen(process.env.PORT, () => {
     console.log(`Szerver fut a ${process.env.PORT} porton`);
